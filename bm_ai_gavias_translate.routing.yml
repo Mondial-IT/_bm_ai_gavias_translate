@@ -1,0 +1,9 @@
+bm_ai_gavias_translate.settings:
+  path: '/admin/config/content/bm-ai-gavias-translate'
+  defaults:
+    _form: '\Drupal\bm_ai_gavias_translate\Form\SettingsForm'
+    _title: 'BM AI Gavias Translate'
+  requirements:
+    _permission: 'administer site configuration'
+  options:
+    _admin_route: TRUE

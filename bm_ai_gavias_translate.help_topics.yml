@@ -1,0 +1,29 @@
+bm_ai_gavias_translate.overview:
+  title: 'BM AI Gavias Translate — Overview'
+  body: help_topics/bm_ai_gavias_translate.overview
+  category:
+    id: ai
+    label: 'AI & Translation'
+  related:
+    - bm_ai_gavias_translate.admin
+    - bm_ai_gavias_translate.developer
+
+bm_ai_gavias_translate.admin:
+  title: 'BM AI Gavias Translate — Admin & Editor Guide'
+  body: help_topics/bm_ai_gavias_translate.admin
+  category:
+    id: ai
+    label: 'AI & Translation'
+  related:
+    - bm_ai_gavias_translate.overview
+    - bm_ai_gavias_translate.developer
+
+bm_ai_gavias_translate.developer:
+  title: 'BM AI Gavias Translate — Developer Guide'
+  body: help_topics/bm_ai_gavias_translate.developer
+  category:
+    id: ai
+    label: 'AI & Translation'
+  related:
+    - bm_ai_gavias_translate.overview
+    - bm_ai_gavias_translate.admin

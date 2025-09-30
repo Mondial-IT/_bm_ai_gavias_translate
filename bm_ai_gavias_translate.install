@@ -1,0 +1,32 @@
+<?php
+
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\field\Entity\FieldConfig;
+
+/**
+ * Install hook. If a configurable field is used, try to set it translatable.
+ */
+function bm_ai_gavias_translate_install() {
+  // No-op for base fields; configurable fields can be toggled here if present.
+  bm_ai_gavias_translate_mark_translatable('gva_pagebuilder_content');
+}
+
+/**
+ * Helper for configurable fields only (safe if not present).
+ */
+function bm_ai_gavias_translate_mark_translatable(string $field_name): void {
+  $storages = FieldStorageConfig::loadMultiple();
+  foreach ($storages as $storage) {
+    if ($storage->getName() === $field_name && $storage->isTranslatable() === FALSE) {
+      $storage->setTranslatable(TRUE);
+      $storage->save();
+    }
+  }
+  $fields = FieldConfig::loadMultiple();
+  foreach ($fields as $field) {
+    if ($field->getName() === $field_name && !$field->isTranslatable()) {
+      $field->setTranslatable(TRUE);
+      $field->save();
+    }
+  }
+}

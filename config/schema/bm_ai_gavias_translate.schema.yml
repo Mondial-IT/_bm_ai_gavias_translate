@@ -1,0 +1,20 @@
+bm_ai_gavias_translate.settings:
+  type: config_object
+  label: 'BM AI Gavias Translate settings'
+  mapping:
+    field_machine_name:
+      type: string
+      label: 'Gavias Page Builder field machine name (base or configurable)'
+    key_whitelist:
+      type: sequence
+      label: 'Exact keys to translate'
+      sequence:
+        type: string
+    key_patterns:
+      type: sequence
+      label: 'Regex patterns (PCRE) to translate'
+      sequence:
+        type: string
+    preserve_placeholders:
+      type: boolean
+      label: 'Preserve {{ tokens }} and [shortcodes]'

@@ -1,0 +1,60 @@
+<?php
+
+/**
+ * @file
+ * BM AI Gavias Translate module file.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+
+/**
+ * Implements hook_help().
+ */
+function bm_ai_gavias_translate_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'system.modules_list':
+      return t('AI Translate extractor for Gavias Page Builder JSON. '
+        . 'Extracts whitelisted text keys and writes translations back without changing structure. '
+        . 'See <a href=":link">help topics</a> for setup and developer details.',
+        [':link' => Url::fromRoute('help.help_topic', ['id' => 'bm_ai_gavias_translate.overview'])->toString()]
+      );
+
+    case 'help.page.bm_ai_gavias_translate':
+      $link_overview = Url::fromRoute('help.help_topic', ['id' => 'bm_ai_gavias_translate.overview'])->toString();
+      $link_admin    = Url::fromRoute('help.help_topic', ['id' => 'bm_ai_gavias_translate.admin'])->toString();
+      $link_dev      = Url::fromRoute('help.help_topic', ['id' => 'bm_ai_gavias_translate.developer'])->toString();
+      return t('<p><strong>BM AI Gavias Translate</strong> integrates with AI Translate to safely translate Gavias Page Builder JSON.</p>
+        <ul>
+          <li><a href=":ov">Overview</a></li>
+          <li><a href=":ad">Admin/User guide</a></li>
+          <li><a href=":dv">Developer guide</a></li>
+        </ul>', [
+          ':ov' => $link_overview,
+          ':ad' => $link_admin,
+          ':dv' => $link_dev,
+        ]);
+  }
+  return NULL;
+}
+
+/**
+ * Implements hook_entity_base_field_info_alter().
+ *
+ * Ensure Gavias base field is marked translatable if present.
+ */
+function bm_ai_gavias_translate_entity_base_field_info_alter(&$fields, EntityTypeInterface $entity_type) {
+  if ($entity_type->id() !== 'node') {
+    return;
+  }
+  $config = \Drupal::config('bm_ai_gavias_translate.settings');
+  $name = $config->get('field_machine_name') ?? 'gva_pagebuilder_content';
+
+  if (isset($fields[$name]) && $fields[$name] instanceof BaseFieldDefinition) {
+    if (!$fields[$name]->isTranslatable()) {
+      $fields[$name]->setTranslatable(TRUE);
+    }
+  }
+}

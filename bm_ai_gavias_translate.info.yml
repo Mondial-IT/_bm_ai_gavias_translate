@@ -1,0 +1,8 @@
+name: 'BM AI Gavias Translate'
+type: module
+description: 'AI Translate extractor for Gavias Page Builder JSON (supports base field gva_pagebuilder_content).'
+core_version_requirement: '^10 || ^11'
+package: 'Blue Marloc'
+dependencies:
+  - drupal:ai
+  - drupal:ai_translate
